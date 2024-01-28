@@ -1,0 +1,24 @@
+﻿@using Wakfreeca.Client.Components
+@inherits LayoutComponentBase
+@inject MudThemeProvider _themeProvider
+
+<ThemeProvider Provider="_themeProvider"/>
+
+<div class="page mud-layout">
+
+    <div class="top-row mud-drawer-head">
+        <div>
+            <a class="navbar-brand" href="/">Wakfreeca</a>
+        </div>
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <ThemeButton />
+        </div>
+
+        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-2 pt-2">
+            @Body
+        </MudContainer>
+    </main>
+</div>
