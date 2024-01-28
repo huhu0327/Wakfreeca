@@ -1,0 +1,25 @@
+﻿@inject MudThemeProvider _themeProvider
+
+<MudThemeProvider @ref="@_themeProvider" IsDarkMode="_themeProvider.IsDarkMode"></MudThemeProvider>
+
+@code {
+ 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _themeProvider.Theme = new()
+        {
+            Palette = new ()
+            {
+                Primary = "#594AE2",
+                AppbarBackground = "#594AE2"
+            },
+            PaletteDark = new ()
+            {
+                Primary = "#594AE2",
+                AppbarBackground = "#594AE2"
+            }
+        };
+    }
+
+}
