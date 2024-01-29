@@ -3,6 +3,7 @@ using MudBlazor;
 using Wakfreeca.Components;
 using MudBlazor.Services;
 using Wakfreeca.Client.Pages;
+using Wakfreeca.Client.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +11,9 @@ builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
 builder.Services.AddMudServices();
-builder.Services.AddScoped<MudThemeProvider>();
 builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddScoped<IUserPreferencesService, UserPreferencesService>();
+builder.Services.AddScoped<IThemeService, ThemeService>();
 
 var app = builder.Build();
 

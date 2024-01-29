@@ -1,24 +1,18 @@
-﻿@using Wakfreeca.Client.Components
-@inherits LayoutComponentBase
-@inject MudThemeProvider _themeProvider
+﻿@inherits LayoutComponentBase
 
-<ThemeProvider Provider="_themeProvider"/>
+<MudThemeProvider @ref="@_themeProvider" IsDarkMode="_themeService.IsDarkMode" IsDarkModeChanged="_themeService.SetDarkMode"/>
 
-<div class="page mud-layout">
-
-    <div class="top-row mud-drawer-head">
-        <div>
-            <a class="navbar-brand" href="/">Wakfreeca</a>
-        </div>
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <ThemeButton />
-        </div>
-
-        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-2 pt-2">
+<MudLayout>
+    <MudAppBar Elevation="0">
+        <MudLink Color="Color.Inherit" Underline="Underline.None" Href="/">Wakfreeca</MudLink>
+        <MudSpacer />
+         <MudTooltip Text="@_toolTip" Delay="300" Arrow="true" Placement="Placement.Right" Color="Color.Dark">
+        <MudIconButton Icon="@_icon" Color="Color.Inherit" @onclick="ToggleThemeMode" />
+        </MudTooltip>
+    </MudAppBar>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 pt-16">
             @Body
         </MudContainer>
-    </main>
-</div>
+    </MudMainContent>
+</MudLayout>
