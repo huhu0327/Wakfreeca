@@ -8,7 +8,6 @@ public interface IThemeService
     bool IsDarkMode { get; }
     Task SetDarkMode(bool isDarkMode);
     Task ApplyUserPreferences(bool isDarkModeDefaultTheme);
-    // Task ToggleThemeMode();
 }
 
 public class ThemeService() : IThemeService
@@ -16,24 +15,24 @@ public class ThemeService() : IThemeService
     public event EventHandler? UpdatedHandler;
     public bool IsDarkMode { get; private set; }
 
-    private readonly IUserPreferencesService _userPreferencesService = default!;
-    private UserPreferences? _userPreferences;
+    private readonly IPreferencesService _preferencesService = default!;
+    private Preferences? _userPreferences;
 
-    public ThemeService(IUserPreferencesService userPreferencesService) : this()
+    public ThemeService(IPreferencesService preferencesService) : this()
     {
-        _userPreferencesService = userPreferencesService;
+        _preferencesService = preferencesService;
     }
 
     public async Task SetDarkMode(bool isDarkMode)
     {
         IsDarkMode = isDarkMode;
-        await _userPreferencesService.SaveUserPreferences(_userPreferences!);
+        await _preferencesService.SavePreferences(_userPreferences!);
         OnUpdateHandler();
     }
 
-    public async Task ApplyUserPreferences(bool isDarkModeDefaultTheme = false)
+    public async Task ApplyUserPreferences(bool isDarkModeDefaultTheme)
     {
-        _userPreferences = await _userPreferencesService.LoadUserPreferences();
+        _userPreferences = await _preferencesService.LoadPreferences();
         if (_userPreferences != null)
         {
             IsDarkMode = _userPreferences.IsDarkMode;
@@ -42,16 +41,9 @@ public class ThemeService() : IThemeService
         {
             IsDarkMode = isDarkModeDefaultTheme;
             _userPreferences = new() { IsDarkMode = IsDarkMode };
-            await _userPreferencesService.SaveUserPreferences(_userPreferences);
+            await _preferencesService.SavePreferences(_userPreferences);
         }
     }
-
-    // public async Task ToggleThemeMode()
-    // {
-    //     IsDarkMode = !IsDarkMode;
-    //     _userPreferences!.IsDarkMode = IsDarkMode;
-    //     
-    // }
 
     private void OnUpdateHandler() => UpdatedHandler?.Invoke(this, EventArgs.Empty);
 }

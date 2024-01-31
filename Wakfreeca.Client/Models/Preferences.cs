@@ -1,6 +1,6 @@
 namespace Wakfreeca.Client.Models;
 
-public class UserPreferences
+public class Preferences
 {
     public bool IsDarkMode { get; set; }
 }
