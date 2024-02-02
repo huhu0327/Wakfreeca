@@ -5,8 +5,8 @@ namespace Wakfreeca.Client.Services;
 
 public interface IPreferencesService
 {
-    public Task SavePreferences(Preferences preferences);
-    public Task<Preferences?> LoadPreferences();
+    Task SavePreferences(Preferences preferences);
+    Task<Preferences?> LoadPreferences();
 }
 
 public class PreferencesService(ILocalStorageService localStorageService) : IPreferencesService

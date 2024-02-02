@@ -12,7 +12,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddMudServices();
 builder.Services.AddBlazoredLocalStorage();
-builder.Services.AddScoped<IUserPreferencesService, UserPreferencesService>();
+builder.Services.AddScoped<IPreferencesService, PreferencesService>();
 builder.Services.AddScoped<IThemeService, ThemeService>();
 
 var app = builder.Build();
